@@ -31,7 +31,7 @@ Rust's core feature is its [ownership system](https://doc.rust-lang.org/book/sec
 
 Here is a hello world program in rust:
 
-```Rust
+```rust
 fn main() {
     println!("Hello, world!");
 }
@@ -117,7 +117,7 @@ It was a little hard to do rendering with pure OpenGL, but it was fun to learn s
 
 Any Emscripten API function can be called as if you were writing C code. Interop with C is pretty easy in Rust.
 
-```Rust
+```rust
 use std::ffi::CString;
 use std::os::raw::c_char;
 
@@ -137,7 +137,7 @@ fn main() {
 
 There is also a macro system in rust that enables DSLs inside Rust:
 
-```Rust
+```rust
 fn main() {
     let message = "Hello, world!";
     run_js! {
@@ -152,7 +152,7 @@ Several crates for Rust on web have appeared since the project started, like [`s
 
 JSON format is used in game log, and to interact with JavaScript. There is a great serialization/deserialization library for rust called [`serde`](https://crates.io/crates/serde), which together with [`serde_json`](https://crates.io/crates/serde_json) provides easy deserialization of JSON into typed Rust objects, like:
 
-```Rust
+```rust
 #[derive(Serialize, Deserialize)]
 struct Person {
     name: String,
@@ -180,7 +180,7 @@ The above example uses custom derive feature in Rust, which is basically code ge
 
 Custom derive is also used in the renderer for OpenGL vertex data structures, resources, and settings:
 
-```Rust
+```rust
 #[derive(Resources)]
 pub struct FactoryResources {
     #[path = "assets/facilities/Factory.obj"]
@@ -212,7 +212,7 @@ Rust does not have exceptions, instead it has `Result` for recoverable errors, w
 
 For example, result of OpenGL shader compilation is either a compiled shader or an compilation error string.
 
-```Rust
+```rust
 impl Shader {
     pub fn compile(source: &str, typ: ShaderType) -> Result<Self, String> {
         // Pseudo code
@@ -228,7 +228,7 @@ impl Shader {
 
 There are also unrecoverable errors in Rust that are called "panics". In case your program panics, it just shows the error message with stacktrace and exits. You can though setup a panic hook to display a fancy error message so that opening dev console in browser is not necessary:
 
-```Rust
+```rust
 fn panic_hook(info: &std::panic::PanicInfo) {
     let error: String = if let Some(error) = info.payload().downcast_ref::<String>() {
         error.clone()
@@ -254,7 +254,7 @@ One issue there was with WebAssembly is that it is the only place where [undefin
 
 Although originally the renderer was being written to run in browser it is possible to compile and run it as a native application. Most of the code is reused, but some parts have to be rewritten, like reading files instead of sending requests, or creating the window instead of a canvas element. This can be easily done with conditional compilation:
 
-```Rust
+```rust
 impl GLContext {
     #[cfg(target_os = "emscripten")]
     pub fn new() -> Result<Self, GLContextCreationError> {
