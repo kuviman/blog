@@ -204,3 +204,5 @@ fn main() {
 This is it. Hopefully you find it useful (*I mean the article, `glitchcat` is pretty dumb*).
 
 [Here's `glitchcat` project on GitHub](https://github.com/kuviman/glitchcat)
+
+![Thanks for reading!]({{ "/assets/images/glitchcat/thanks.gif" }})
