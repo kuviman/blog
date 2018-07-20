@@ -3,7 +3,7 @@ layout: post
 title: glitchcat — Creating CLI apps in Rust is super easy
 ---
 
-[`glitchcat`](https://github.com/kuviman/glitchcat) is a cat-like program that creates a glitch-like animation of text.
+[`glitchcat`](https://github.com/kuviman/glitchcat) is a cat-like program with glitch animation.
 
 For example:
 
@@ -61,13 +61,16 @@ struct Opt {
         short = "d",
         long = "duration",
         default_value = "1000",
-        help = "Duration of animation in millis (negative means infinite)"
+        help = "Duration of animation in millis (of \"infinite\"/\"inf\")"
     )]
-    duration: i64,
+    duration: Duration,
     #[structopt(
-        short = "s", long = "step", default_value = "100", help = "Animation step in millis"
+        short = "a",
+        long = "amount",
+        default_value = "90",
+        help = "Percentage of symbols glitched each animation step"
     )]
-    step: u64,
+    amount: Percent,
     // ...
 }
 ```
