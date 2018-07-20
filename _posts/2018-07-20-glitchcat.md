@@ -45,6 +45,10 @@ fortune | glitchcat
 
 *Actually, I lied, I dont use `fortune`. You know, you don't need fortune when you use Rust, right? ;)*
 
+## Why Rust?
+
+Simply because I love the language. And I actually feel like I'm more productive in it than in other languages. Although, I feel like starting using it was a little harder than others, so one thing I would recommend to begginners is to read through the Book first, before writing any code, and then do it again.
+
 ## Useful crates
 
 Creating this program was actually pretty easy, with the help of the following crates:
