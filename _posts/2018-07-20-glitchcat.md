@@ -55,7 +55,7 @@ Almost every CLI app needs ability to be configured through command line argumen
 
 ```rust
 #[derive(StructOpt)]
-#[structopt(about = "cat-like program with glitch-like animation")]
+#[structopt(about = "cat-like program with glitch animation")]
 struct Opt {
     #[structopt(
         short = "d",
