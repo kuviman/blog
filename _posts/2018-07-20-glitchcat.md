@@ -9,7 +9,7 @@ For example:
 
 ![Hello, world!]({{ "/assets/images/glitchcat/hello_world.gif" }})
 
-It also works like magic in combination `lolcat`:
+It also works like magic in combination with `lolcat`:
 
 ![This is Magick!]({{ "/assets/images/glitchcat/this_is_magic.gif" }})
 
@@ -75,6 +75,40 @@ struct Opt {
 This will also automatically generate `--help` command for your application:
 
 ![glitchcat --help]({{ "/assets/images/glitchcat/glitchcat_help.png" }})
+
+#### - `failure`
+
+Another thing that everyone should handle is errors. Using `failure` crate you can `#[derive(Fail)]` for your custom error types easily:
+
+```rust
+#[derive(Fail, Debug)]
+pub enum ParsePercentError {
+    #[fail(display = "Value should be between 0 and 100")]
+    TooBig,
+    #[fail(display = "{}", _0)]
+    ParseIntError(#[cause] <u8 as FromStr>::Err),
+}
+
+#[derive(Debug, Copy, Clone)]
+pub struct Percent(u8);
+
+impl FromStr for Percent {
+    type Err = ParsePercentError;
+    fn from_str(s: &str) -> Result<Self, ParsePercentError> {
+        let value = match s.parse() {
+            Ok(value) => value,
+            Err(e) => return Err(ParsePercentError::ParseIntError(e)),
+        };
+        if value > 100 {
+            Err(ParsePercentError::TooBig)
+        } else {
+            Ok(Percent(value))
+        }
+    }
+}
+```
+
+![glitchcat --amount 100500]({{ "/assets/images/glitchcat/failure.png" }})
 
 #### - `dialoguer` & `indicatif`
 
